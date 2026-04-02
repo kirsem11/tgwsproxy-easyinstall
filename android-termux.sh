@@ -1,6 +1,6 @@
 ##################################################
 # android-termux.sh
-##################################################
+# Borrowed from https://gist.githubusercontent.com/mtkpapa/3ad8841d7f93b5f33ae26ef4111e6c62/raw/69d3365acd01295872b2808b27dfb940764821de/tg-ws-proxy-install.sh
 # Copyrigth (c) 2026 Kirill Semenov
 ##################################################
 
@@ -26,6 +26,6 @@ git clone "https://github.com/Flowseal/$REPO_NAME" "$REPO_ROOT/$REPO_NAME"
 echo "$RUN_CMD" >> $BASHRC
 
 # start proxy
-$RUN_CMD
+eval "$RUN_CMD"
 
 ##################################################
