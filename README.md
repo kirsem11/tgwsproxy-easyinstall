@@ -8,5 +8,5 @@
 
 Выполните в командной строке:
 ```sh
-curl -fsSL https://github.com/kirsem11/tgwsproxy-easyinstall/releases/download/v1.2/android-termux.sh | sh
+curl -fsSL https://github.com/kirsem11/tgwsproxy-easyinstall/releases/download/v1.3/android-termux.sh | sh
 ```
