@@ -11,12 +11,30 @@ REPO_NAME="tg-ws-proxy"
 REPO_ROOT="$HOME"
 BASHRC="$HOME/.bashrc"
 
-SECRET="71aff5b77c58c1f13efa5e48ded5acf3" # without 'dd' prefix # this is random secret, you can use it or generate your own MTProxy secret
+# this is random secret, you can use it or generate your own MTProto proxy secret
+SECRET="71aff5b77c58c1f13efa5e48ded5acf3" # without 'dd' prefix
 PORT=1443
-DC_IP="--dc-ip 5:149.154.175.55" # you can specify more DC IPs
+DC_IP="--dc-ip 5:149.154.175.55 --dc-ip 2:149.154.167.220 --dc-ip 4:149.154.167.220" # you can specify more DC IPs
 
 CMD="tg_ws_proxy.py"
-RUN_CMD="pgrep -f '$CMD' > /dev/null || nohup python $REPO_ROOT/$REPO_NAME/proxy/tg_ws_proxy.py --port $PORT --secret $SECRET $DC_IP"
+
+# run proxy
+run_proxy( )
+{
+  if ! pgrep -f "$CMD" > /dev/null; then
+    nohup python $REPO_ROOT/$REPO_NAME/proxy/tg_ws_proxy.py --port $PORT --secret $SECRET $DC_IP2 >&1 | tee nohup.log &
+    echo "The proxy server is started"
+  else
+    echo "The proxy server is already running"
+  fi
+}
+
+# create autocommand in $BASHRC
+update_bashrc( )
+{
+  echo "pgrep -f '$CMD' > /dev/null || nohup python $REPO_ROOT/$REPO_NAME/proxy/tg_ws_proxy.py --port $PORT --secret $SECRET $DC_IP &" >> $BASHRC
+  echo "Created autocommand in $BASHRC"
+}
 
 # termux update & upgrade & install requirement packages
 pkg update && pkg upgrade -y -o Dpkg::Options::="--force-confold"
@@ -25,10 +43,8 @@ pkg install -y git python python-pip python-cryptography
 # cloning repo
 git clone "https://github.com/Flowseal/$REPO_NAME" "$REPO_ROOT/$REPO_NAME"
 
-# set autocommand in $BASHRC
-echo "$RUN_CMD &" >> $BASHRC
-
-# start proxy
-eval "$RUN_CMD"
+# start
+update_bashrc
+run_proxy
 
 ##################################################
