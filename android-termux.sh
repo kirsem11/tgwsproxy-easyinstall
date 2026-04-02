@@ -16,17 +16,17 @@ PORT=1443
 DC_IP="--dc-ip 5:149.154.175.55" # you can specify more DC IPs
 
 CMD="tg_ws_proxy.py"
-RUN_CMD="pgrep -f '$CMD' > /dev/null || nohup python $REPO_ROOT/$REPO_NAME/proxy/tg_ws_proxy.py --port $PORT --secret $SECRET $DC_IP &"
+RUN_CMD="pgrep -f '$CMD' > /dev/null || nohup python $REPO_ROOT/$REPO_NAME/proxy/tg_ws_proxy.py --port $PORT --secret $SECRET $DC_IP"
 
 # termux update & upgrade & install requirement packages
 pkg update && pkg upgrade -y -o Dpkg::Options::="--force-confold"
 pkg install -y git python python-pip python-cryptography
 
-# cloning into ~/ directory
+# cloning repo
 git clone "https://github.com/Flowseal/$REPO_NAME" "$REPO_ROOT/$REPO_NAME"
 
 # set autocommand in $BASHRC
-echo "$RUN_CMD" >> $BASHRC
+echo "$RUN_CMD &" >> $BASHRC
 
 # start proxy
 eval "$RUN_CMD"
