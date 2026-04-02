@@ -14,7 +14,7 @@ BASHRC="$HOME/.bashrc"
 # this is random secret, you can use it or generate your own MTProto proxy secret
 SECRET="71aff5b77c58c1f13efa5e48ded5acf3" # without 'dd' prefix
 PORT=1443
-DC_IP="--dc-ip 5:149.154.175.55 --dc-ip 2:149.154.167.220 --dc-ip 4:149.154.167.220" # you can specify more DC IPs
+DC_IP="--dc-ip 1:149.154.175.50 --dc-ip 2:149.154.167.220 --dc-ip 3:149.154.175.100 --dc-ip 4:149.154.167.220 --dc-ip 5:149.154.171.5 --dc-ip 5:149.154.175.55" # you can specify more DC IPs
 
 CMD="tg_ws_proxy.py"
 
